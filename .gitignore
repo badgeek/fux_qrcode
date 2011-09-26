@@ -1,2 +1,4 @@
 .svn
 .DS_Store
+
+zxing/zxing/qrcode/detector/FinderPatternInfo.cpp
