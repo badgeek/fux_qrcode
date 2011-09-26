@@ -45,10 +45,10 @@ CPPEXTERN_HEADER(fux_qrcode, GemPixObj)
 
     public:
 
-	//////////
-	// Constructor
+		//////////
+		// Constructor
     	fux_qrcode();
-	void decode(imageStruct &pixels, bool adaptive = true);
+		void decode(imageStruct &pixels, bool adaptive = true);
     	
     protected:
     	
@@ -57,16 +57,16 @@ CPPEXTERN_HEADER(fux_qrcode, GemPixObj)
     	virtual ~fux_qrcode();
     	virtual void processRGBAImage(imageStruct &image);
         
-        unsigned int	*saved;
-        t_inlet         *inletBlur;
-        t_inlet         *inletLength;
-	t_outlet	*outletQR;
-    private:
+        //unsigned int	*saved;
+        //t_inlet         *inletBlur;
+        //t_inlet         *inletLength;
+		t_outlet		*outletQR;
+    	private:
     
     	//////////
     	// Static member functions
-	static void lengthCallback(void *data, t_floatarg value);
-        static void blurCallback(void *data, t_floatarg value);
+		//static void lengthCallback(void *data, t_floatarg value);
+        //static void blurCallback(void *data, t_floatarg value);
 
 
 };

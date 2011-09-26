@@ -28,10 +28,6 @@ using namespace zxing::qrcode;
 fux_qrcode :: fux_qrcode()
 {	
 
-long size,src,i;    
-//inletBlur = inlet_new(this->x_obj, &this->x_obj->ob_pd, &s_float, gensym("amount"));
-//inletLength = inlet_new(this->x_obj, &this->x_obj->ob_pd, &s_float, gensym("length"));
-
 }
 
 /////////////////////////////////////////////////////////
@@ -40,8 +36,7 @@ long size,src,i;
 /////////////////////////////////////////////////////////
 fux_qrcode :: ~fux_qrcode()
 {
-  //delete saved;
-  //relocate this to on external deletion
+	outlet_free(outletQR);
 }
 
 void fux_qrcode::decode(imageStruct& image, bool adaptive) {
@@ -66,11 +61,15 @@ void fux_qrcode::decode(imageStruct& image, bool adaptive) {
     hints.setTryHarder(true);
     
     Ref<Result> result(reader.decode(image, hints));
-    post("QRcode detected");
-	
 	std::string QRtext = result->getText()->getText();
 	
-	
+	char *a=new char[QRtext.size()+1]
+	a[QRtext.size()]=0;
+	memcpy(a,QRtext.c_str(),QRtext.size());
+
+	outlet_symbol(outletQR, gensym(a));
+
+	delete a;
 	
   } catch (zxing::Exception& e) {
    	//post(e.what()); // << e.what() << endl;
@@ -85,14 +84,7 @@ void fux_qrcode::decode(imageStruct& image, bool adaptive) {
 /////////////////////////////////////////////////////////
 void fux_qrcode :: processRGBAImage(imageStruct &image)
 {
-  //int h,w,hlength;
-  //int R,G,B;
-  //unsigned char *pixels=image.data;
-
   decode(image,true);
-
-  //hlength = image.xsize;
-
 }
 
 /////////////////////////////////////////////////////////
@@ -102,17 +94,4 @@ void fux_qrcode :: processRGBAImage(imageStruct &image)
 void fux_qrcode :: obj_setupCallback(t_class *classPtr)
 {
 
-    class_addmethod(classPtr, (t_method)&fux_qrcode::blurCallback,gensym("amount"), A_DEFFLOAT, A_NULL);
-    class_addmethod(classPtr, (t_method)&fux_qrcode::lengthCallback,gensym("length"), A_DEFFLOAT, A_NULL);
-
-}
-
-void fux_qrcode :: blurCallback(void *data, t_floatarg value)
-{
-	//GetMyClass(data)->m_glitchAmount=(value);
-}
-
-void fux_qrcode :: lengthCallback(void *data, t_floatarg value)
-{
-	//GetMyClass(data)->m_glitchLength=(value);
 }
