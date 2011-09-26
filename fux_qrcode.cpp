@@ -68,7 +68,7 @@ void fux_qrcode::decode(imageStruct& image, bool adaptive) {
 	memcpy(a,QRtext.c_str(),QRtext.size());
 
 	outlet_symbol(outletQR, gensym(a));
-
+	
 	delete a;
 	
   } catch (zxing::Exception& e) {
