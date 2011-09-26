@@ -2,3 +2,7 @@
 .DS_Store
 
 zxing/zxing/qrcode/detector/FinderPatternInfo.cpp
+zxing/
+.fux_qrcode.cpp.swp
+
+zxing/zxing/BarcodeFormat.cpp
