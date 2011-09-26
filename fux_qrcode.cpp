@@ -27,7 +27,7 @@ using namespace zxing::qrcode;
 
 fux_qrcode :: fux_qrcode()
 {	
-
+	outletQR = outlet_new(this->x_obj, 0);
 }
 
 /////////////////////////////////////////////////////////
@@ -63,7 +63,7 @@ void fux_qrcode::decode(imageStruct& image, bool adaptive) {
     Ref<Result> result(reader.decode(image, hints));
 	std::string QRtext = result->getText()->getText();
 	
-	char *a=new char[QRtext.size()+1]
+	char *a=new char[QRtext.size()+1];
 	a[QRtext.size()]=0;
 	memcpy(a,QRtext.c_str(),QRtext.size());
 
