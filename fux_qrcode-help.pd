@@ -1,0 +1,26 @@
+#N canvas 449 272 680 471 10;
+#X obj 135 111 fux_qrcode;
+#X obj 135 55 pix_video;
+#X obj 135 82 pix_rgba;
+#X obj 134 28 gemhead;
+#X obj 221 87 gemwin;
+#X msg 221 43 create;
+#X obj 272 45 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 135 189 pix_texture;
+#X obj 192 138 unsymbol;
+#X obj 221 254 text2d;
+#X obj 221 177 gemhead;
+#X obj 135 214 rectangle 4 3;
+#X obj 234 212 list prepend;
+#X connect 0 0 7 0;
+#X connect 0 1 8 0;
+#X connect 1 0 2 0;
+#X connect 2 0 0 0;
+#X connect 3 0 1 0;
+#X connect 5 0 4 0;
+#X connect 6 0 4 0;
+#X connect 7 0 11 0;
+#X connect 8 0 12 0;
+#X connect 10 0 9 0;
+#X connect 12 0 9 0;
