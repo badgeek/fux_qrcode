@@ -26,12 +26,11 @@ endif
 .SUFFIXES = $(EXTENSION)
 
 SOURCES = fux_qrcode
-#OUTPUT  = mesh_square
 
 all:
 	g++ $(LDFLAGS) $(INCLUDES) $(CPPFLAGS) -o fuxPixelsBitmapSource.o -c fuxPixelsBitmapSource.cpp
-	g++ $(LDFLAGS) $(INCLUDES) $(CPPFLAGS) -o $(SOURCES).o -c $(SOURCES).cpp
-	g++ -o $(SOURCES).$(EXTENSION) -arch i386 -dynamiclib -mmacosx-version-min=10.3 -undefined dynamic_lookup -framework QuickTime -framework Carbon -framework AGL -framework OpenGL -arch i386 ./*.o -L/sw/lib -lfreeimage -lstdc++ -ldl -lz -lm -lpthread -L$(PD_DIR)/bin -L$(PD_DIR) -L/Users/xcorex/Documents/Documents/Projects/Puredata/PdSource/External-Dev/fux_qrcode/libs -lzxing
+	g++ $(LDFLAGS) $(INCLUDES) $(CPPFLAGS) -o fux_qrcode.o -c fux_qrcode.cpp
+	g++ -o $(SOURCES).$(EXTENSION) -arch i386 -dynamiclib -mmacosx-version-min=10.3 -undefined dynamic_lookup -framework QuickTime -framework Carbon -framework AGL -framework OpenGL -arch i386 ./*.o -L/sw/lib -lstdc++ -ldl -lz -lm -lpthread -L$(PD_DIR)/bin -L$(PD_DIR) -L/Users/xcorex/Documents/Documents/Projects/Puredata/PdSource/External-Dev/fux_qrcode/libs -lzxing
 	rm -fr ./*.o
 deploy:
 	rm -fr $(PD_APP_DIR)/extra/$(SOURCES).$(EXTENSION)
