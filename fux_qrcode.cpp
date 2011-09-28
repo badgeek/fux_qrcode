@@ -29,6 +29,7 @@ fux_qrcode :: fux_qrcode()
 {	
 	outletQR 	   	 = outlet_new(this->x_obj, 0);
 	outletQRDetected = outlet_new(this->x_obj, 0);
+	prevDetected 	 = 0;
 	isDetected       = 0;
 }
 
@@ -69,22 +70,27 @@ void fux_qrcode::decode(imageStruct& image, bool adaptive) {
 	char *a=new char[QRtext.size()+1];
 	a[QRtext.size()]=0;
 	memcpy(a,QRtext.c_str(),QRtext.size());
-	
-	if (isDetected == 0)
-	{
-		isDetected = 1;
-		outlet_bang(outletQRDetected);
-	}
-	
+
 	outlet_symbol(outletQR, gensym(a));
+	
+	prevDetected = isDetected;
+	isDetected = 1;
 	
 	delete a;
 	
   } catch (zxing::Exception& e) {
+	
+	prevDetected = isDetected;
 	isDetected = 0;
+	//outlet_float(outletQRDetected,  (t_float) isDetected);
    	//post(e.what()); // << e.what() << endl;
   }
 
+  if (prevDetected != isDetected)
+  {
+	 outlet_float(outletQRDetected,  (t_float) isDetected);	
+  }
+ 
 }
 
 

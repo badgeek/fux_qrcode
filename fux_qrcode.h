@@ -63,6 +63,7 @@ CPPEXTERN_HEADER(fux_qrcode, GemPixObj)
 		t_outlet		*outletQR;
 		t_outlet		*outletQRDetected;
 		
+		int prevDetected;
 		int isDetected;
 		
     	private:

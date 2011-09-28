@@ -1,4 +1,4 @@
-#N canvas 263 243 680 471 10;
+#N canvas 691 361 680 471 10;
 #X obj 233 117 fux_qrcode;
 #X obj 135 55 pix_video;
 #X obj 135 82 pix_rgba;
@@ -9,15 +9,19 @@
 1;
 #X obj 135 189 pix_texture;
 #X obj 245 154 unsymbol;
-#X obj 221 254 text2d;
+#X obj 235 328 text2d;
 #X obj 221 177 gemhead;
-#X obj 135 214 rectangle 4 3;
+#X obj 112 236 rectangle 4 3;
 #X obj 234 212 list prepend;
 #X obj 310 145 bng 40 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 371 214 delay 1000;
 #X obj 366 275 bng 40 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
+#X msg 195 21 dialog;
+#X obj 215 266 translateXYZ;
+#X floatatom 272 240 5 0 0 0 - - -;
+#X msg 147 295 text FUX_QRCODE;
 #X connect 0 0 7 0;
 #X connect 0 1 8 0;
 #X connect 0 2 13 0;
@@ -28,7 +32,11 @@
 #X connect 6 0 4 0;
 #X connect 7 0 11 0;
 #X connect 8 0 12 0;
-#X connect 10 0 9 0;
+#X connect 10 0 17 0;
 #X connect 12 0 9 0;
 #X connect 13 0 14 0;
 #X connect 14 0 15 0;
+#X connect 16 0 1 0;
+#X connect 17 0 9 0;
+#X connect 18 0 17 2;
+#X connect 19 0 9 0;
