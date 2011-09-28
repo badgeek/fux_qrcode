@@ -27,7 +27,9 @@ using namespace zxing::qrcode;
 
 fux_qrcode :: fux_qrcode()
 {	
-	outletQR = outlet_new(this->x_obj, 0);
+	outletQR 	   	 = outlet_new(this->x_obj, 0);
+	outletQRDetected = outlet_new(this->x_obj, 0);
+	isDetected       = 0;
 }
 
 /////////////////////////////////////////////////////////
@@ -37,6 +39,7 @@ fux_qrcode :: fux_qrcode()
 fux_qrcode :: ~fux_qrcode()
 {
 	outlet_free(outletQR);
+	outlet_free(outletQRDetected);
 }
 
 void fux_qrcode::decode(imageStruct& image, bool adaptive) {
@@ -66,12 +69,19 @@ void fux_qrcode::decode(imageStruct& image, bool adaptive) {
 	char *a=new char[QRtext.size()+1];
 	a[QRtext.size()]=0;
 	memcpy(a,QRtext.c_str(),QRtext.size());
-
+	
+	if (isDetected == 0)
+	{
+		isDetected = 1;
+		outlet_bang(outletQRDetected);
+	}
+	
 	outlet_symbol(outletQR, gensym(a));
 	
 	delete a;
 	
   } catch (zxing::Exception& e) {
+	isDetected = 0;
    	//post(e.what()); // << e.what() << endl;
   }
 

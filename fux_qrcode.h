@@ -58,9 +58,13 @@ CPPEXTERN_HEADER(fux_qrcode, GemPixObj)
     	virtual void processRGBAImage(imageStruct &image);
         
         //unsigned int	*saved;
-        //t_inlet         *inletBlur;
-        //t_inlet         *inletLength;
+        //t_inlet       *inletBlur;
+        //t_inlet       *inletLength;
 		t_outlet		*outletQR;
+		t_outlet		*outletQRDetected;
+		
+		int isDetected;
+		
     	private:
     
     	//////////
